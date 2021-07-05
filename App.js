@@ -1,55 +1,62 @@
 import { StatusBar } from 'expo-status-bar';
 import React from 'react';
-import { StyleSheet, Text, View, Image, TextInput, TouchableOpacity, Platform } from 'react-native';
+import { StyleSheet, Text, View, Image, TextInput, TouchableOpacity, Platform, KeyboardAvoidingView, Keyboard, TouchableWithoutFeedback } from 'react-native';
 import {FontAwesome5} from '@expo/vector-icons';
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      <StatusBar backgroundColor="#FFFFFF" translucent={false} />
-      <Image 
-        source={require('./src/img/logo.png')}
-        style={styles.logo}
-      />
+    <KeyboardAvoidingView
+      behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+    >
+      <TouchableWithoutFeedback onPress={() => Keyboard.dismiss}>
+        <View style={styles.container}>
+          <StatusBar backgroundColor="#FFFFFF" translucent={false} />
+          <Image 
+            source={require('./src/img/logo.png')}
+            style={styles.logo}
+          />
 
-      <TextInput 
-        placeholder="Celular, username ou e-mail"
-        style={styles.input}
-      />
+          <TextInput 
+            placeholder="Celular, username ou e-mail"
+            style={styles.input}
+          />
 
-      <TextInput 
-        placeholder="Sua senha"
-        style={styles.input}
-      />
+          <TextInput 
+            placeholder="Sua senha"
 
-      <View style={styles.forgotPwd}>
-        <TouchableOpacity>
-          <Text style={styles.forgotPwdText}>Esqueceu sua senha?</Text>
-        </TouchableOpacity>
-      </View>
+            style={styles.input}
+          />
 
-      <TouchableOpacity style={styles.loginButton}>
-        <Text style={styles.loginButtonText}>Acessar</Text>
-      </TouchableOpacity>
+          <View style={styles.forgotPwd}>
+            <TouchableOpacity>
+              <Text style={styles.forgotPwdText}>Esqueceu sua senha?</Text>
+            </TouchableOpacity>
+          </View>
 
-      <TouchableOpacity style={styles.btnFacebook}>
-        <FontAwesome5 name="facebook" size={25} color="#399FFF" />
-        <Text style={styles.facebookText}>Continue como Felipe</Text>
-      </TouchableOpacity>
+          <TouchableOpacity style={styles.loginButton}>
+            <Text style={styles.loginButtonText}>Acessar</Text>
+          </TouchableOpacity>
 
-      <View style={styles.divisor}>
-        <View style={styles.divisorLine}></View>
-          <Text style={{marginHorizontal: '3%'}}>OU</Text>
-        <View style={styles.divisorLine}></View>
-      </View>
+          <TouchableOpacity style={styles.btnFacebook}>
+            <FontAwesome5 name="facebook" size={25} color="#399FFF" />
+            <Text style={styles.facebookText}>Continue como Felipe</Text>
+          </TouchableOpacity>
 
-      <View style={styles.signupContainer}>
-        <Text style={styles.signupText}>Não possui uma conta?</Text>
-        <TouchableOpacity>
-          <Text style={styles.signupTextButton}>Cadastre-se</Text>
-        </TouchableOpacity>
-      </View>
-    </View>
+          <View style={styles.divisor}>
+            <View style={styles.divisorLine}></View>
+              <Text style={{marginHorizontal: '3%'}}>OU</Text>
+            <View style={styles.divisorLine}></View>
+          </View>
+
+          <View style={styles.signupContainer}>
+            <Text style={styles.signupText}>Não possui uma conta?</Text>
+            <TouchableOpacity>
+              <Text style={styles.signupTextButton}>Cadastre-se</Text>
+            </TouchableOpacity>
+          </View>
+        </View>
+      </TouchableWithoutFeedback>
+    </KeyboardAvoidingView>
   );
 }
 
